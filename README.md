@@ -29,3 +29,7 @@ Categories:
   - Code Examination
   - Mobile Apps
   - OSINT
+  - Network Forensics
+  - Cryptography
+  - Stengraphy
+  - Programming

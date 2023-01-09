@@ -1,5 +1,5 @@
 # Checklists
-All the checklists/tools for all types of enumeration and pentesting
+All the checklists/tools for all types of CTF Challenges
 
 **Includes**
 - Active Directory
@@ -20,16 +20,20 @@ Categories:
 - Windows
   - Active Directory
   - SMB
+  - Priv Esc
 - Linux
   - Web App
   - SSH
   - PHP
   - FTP
+  - Priv Esc
 - Other
-  - Code Examination
+  - Forensics
+    - Code 
+    - Network
   - Mobile Apps
   - OSINT
-  - Network Forensics
   - Cryptography
   - Stengraphy
   - Programming
+  - Binary

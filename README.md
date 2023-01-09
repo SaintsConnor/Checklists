@@ -1,19 +1,9 @@
 # Checklists
 All the checklists/tools for all types of CTF Challenges
 
-**Includes**
-- Active Directory
-- SSH
-- FTP
-- SMB
-- OSINT
-- PHP
-- SQL
-- General WebApp
-- General Code
-- Mobile App
 
-*It also includes a portion for default usernames/passwords.*
+
+*It also includes a portion for default usernames/passwords (See Other/Common).*
 
 Categories:
 
@@ -37,3 +27,10 @@ Categories:
   - Stengraphy
   - Programming
   - Binary
+  - Common 
+    - Services
+    - Tools
+    - Usernames
+    - Passwords
+    - Default Passwords/Usernames (FORMAT: Service - Username - Password)
+  

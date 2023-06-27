@@ -1,0 +1,55 @@
+Start with Bloodhound 
+
+ 
+
+Host (Attackbox) 
+
+service neo4j start 
+
+Bloodhound 
+
+[INGEST DATA – SEE VICTIM] 
+
+ 
+
+Victim (One of below, get to victim machine  
+
+Command: ./SharpHound.exe --CollectionMethods All 
+
+Command: Invoke-BloodHound -CollectionMethod All 
+
+Command: bloodhound-python -u support -p '#00^BlackKnight' -ns 10.10.10.192 -d blackfield.local -c all 
+
+Command: proxychains bloodhound-python -u [Username] -p [Password] -ns 10.10.10.192 -d [DOMAIN]-c all --dns-tcp 
+
+ 
+
+Group3r (transfer to victim) 
+
+Group3r.exe - [filename] 
+
+ 
+
+Pingcastle (Send to victim) 
+
+PingCastle.exe 
+
+ 
+
+Powerview 
+
+On victim: 
+
+Open Powershell 
+
+Transfer powerview to victim 
+
+Set the execution policy to bypass: Set-ExecutionPolicy Bypass 
+
+Import the PowerView PowerShell script: . .\powerview.ps1 
+
+ 
+
+PowerView Cheat Sheet 
+
+ 
